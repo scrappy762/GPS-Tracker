@@ -1,0 +1,24 @@
+#include <Meshtastic.h>
+
+Meshtastic Serial1(Serial);
+
+void setup()
+{
+  Serial.begin(9600);
+  while (!Serial)
+    ;
+
+  Serial1.begin(115200, Serial);
+  Serial.println("Meshtastic started!");
+}
+
+void loop()
+{
+  while (Serial1.available())
+  {
+    Serial.write(Serial1.read());
+  }
+
+  Serial1.sendText("Hello from Lilygo T-Echo!");
+  delay(5000);
+}
